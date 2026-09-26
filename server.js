@@ -84,9 +84,14 @@ http
         if (!e2 && s2.isFile()) {
           // Redirect /diensten -> /diensten/ first: the mirrored pages use
           // relative URLs, which only resolve correctly with the trailing slash.
+          // The redirect target is relative on purpose: with an absolute path
+          // ("/diensten/") the browser would leave the /proxy/<port>/ prefix of
+          // the browser-IDE and land on the wrong URL.
           if (!urlPath.endsWith("/")) {
-            logLine(req, 301, urlPath + "/");
-            res.writeHead(301, { Location: encodeURI(urlPath + "/") + qs });
+            const lastSegment = urlPath.slice(urlPath.lastIndexOf("/") + 1);
+            const location = encodeURI(lastSegment) + "/" + qs;
+            logLine(req, 301, location);
+            res.writeHead(301, { Location: location });
             return res.end();
           }
           logLine(req, 200, dirIndex);
