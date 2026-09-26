@@ -5,6 +5,8 @@
   "description": "Workshop website for rafaat — served on :3000, live at https://rafaat.sdai.nl",
   "scripts": {
     "dev": "node server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "mirror": "node tools/mirror-site.js ./tmp-mirror && echo 'Bekijk ./tmp-mirror en kopieer het naar de root om te publiceren'",
+    "mirror:refresh": "node tools/mirror-site.js . --force"
   }
 }
