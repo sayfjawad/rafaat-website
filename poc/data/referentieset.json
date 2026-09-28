@@ -1,0 +1,11 @@
+{
+  "versie": "demo-2025.01",
+  "beschrijving": "Menselijke referentieset (ground truth) voor de POC-evaluatie.",
+  "dossiers": [
+    { "dossierId": "DOS-0001", "procestypeCode": "VERGUNNING", "resultaatCode": "VERLEEND", "waardering": "V" },
+    { "dossierId": "DOS-0002", "procestypeCode": "BOUW", "resultaatCode": "VERGUND", "waardering": "B" },
+    { "dossierId": "DOS-0003", "procestypeCode": "BEZWAAR", "resultaatCode": "AFGEROND", "waardering": "V" },
+    { "dossierId": "DOS-0004", "procestypeCode": "FINANCIEEL", "resultaatCode": "FACTUUR", "waardering": "V" },
+    { "dossierId": "DOS-0005", "procestypeCode": "VERGUNNING", "resultaatCode": "GEWEIGERD", "waardering": "V" }
+  ]
+}

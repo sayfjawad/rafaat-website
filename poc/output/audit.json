@@ -1,0 +1,249 @@
+{
+  "gegenereerdOp": "2026-09-26T13:26:48.691Z",
+  "engine": "mock",
+  "selectielijstversie": "demo-2025.01",
+  "resultaten": [
+    {
+      "dossierId": "DOS-0001",
+      "dossierNaam": "Horecavergunning Café de Zon",
+      "status": "OK",
+      "engine": "mock",
+      "procestypeCode": "VERGUNNING",
+      "resultaatCode": "VERLEEND",
+      "confidence": 0.86,
+      "evidence": [
+        "vergunning",
+        "horeca",
+        "exploitatie",
+        "verleend"
+      ],
+      "chain": {
+        "status": "OK",
+        "selectielijstversie": "demo-2025.01",
+        "procestype": "Vergunningverlening",
+        "resultaat": "Vergunning verleend",
+        "procestypeCode": "VERGUNNING",
+        "resultaatCode": "VERLEEND",
+        "selectielijstregel": "Vergunning verleend — vernietigen na einde geldigheid",
+        "regelCode": "V1",
+        "waardering": "V",
+        "bewaartermijnJaren": 10,
+        "overbrengingstermijnJaren": null,
+        "termijntrigger": "Einde geldigheid van de vergunning (of intrekking)",
+        "dossierafsluitdatum": "2023-12-31",
+        "termijnstartdatum": "2024-01-01",
+        "onzeker": false,
+        "type": "vernietiging",
+        "vernietigingsdatum": "2034-01-01",
+        "termijnstart": "2024-01-01",
+        "uitzondering": false,
+        "hotspots": []
+      },
+      "verwacht": {
+        "dossierId": "DOS-0001",
+        "procestypeCode": "VERGUNNING",
+        "resultaatCode": "VERLEEND",
+        "waardering": "V"
+      }
+    },
+    {
+      "dossierId": "DOS-0002",
+      "dossierNaam": "Bouwdossier aanbouw woning Dorpsstraat 5",
+      "status": "OK",
+      "engine": "mock",
+      "procestypeCode": "BOUW",
+      "resultaatCode": "VERGUND",
+      "confidence": 0.95,
+      "evidence": [
+        "bouw",
+        "omgevingsvergunning",
+        "bouwwerk",
+        "aanbouw",
+        "vergund",
+        "gereedmelding"
+      ],
+      "chain": {
+        "status": "OK",
+        "selectielijstversie": "demo-2025.01",
+        "procestype": "Omgevingsvergunning bouwen / bouwdossier",
+        "resultaat": "Vergund bouwwerk",
+        "procestypeCode": "BOUW",
+        "resultaatCode": "VERGUND",
+        "selectielijstregel": "Bouwdossier van vergund bouwwerk — blijvend bewaren",
+        "regelCode": "B1",
+        "waardering": "B",
+        "bewaartermijnJaren": null,
+        "overbrengingstermijnJaren": 20,
+        "termijntrigger": "Gereedmelding / oplevering van het bouwwerk",
+        "dossierafsluitdatum": "2025-06-30",
+        "termijnstartdatum": "2025-06-30",
+        "onzeker": false,
+        "type": "overbrenging",
+        "overbrengingsdatum": "2045-06-30",
+        "termijnstart": "2025-06-30",
+        "uitzondering": true,
+        "hotspots": [
+          {
+            "code": "MONUMENT",
+            "naam": "Archeologie / monumenten"
+          }
+        ]
+      },
+      "verwacht": {
+        "dossierId": "DOS-0002",
+        "procestypeCode": "BOUW",
+        "resultaatCode": "VERGUND",
+        "waardering": "B"
+      }
+    },
+    {
+      "dossierId": "DOS-0003",
+      "dossierNaam": "Bezwaar tegen horecavergunning",
+      "status": "OK",
+      "engine": "mock",
+      "procestypeCode": "BEZWAAR",
+      "resultaatCode": "AFGEROND",
+      "confidence": 0.87,
+      "evidence": [
+        "bezwaar",
+        "beslissing op bezwaar"
+      ],
+      "chain": {
+        "status": "OK",
+        "selectielijstversie": "demo-2025.01",
+        "procestype": "Bezwaar en beroep",
+        "resultaat": "Bezwaar-/beroepsprocedure afgerond",
+        "procestypeCode": "BEZWAAR",
+        "resultaatCode": "AFGEROND",
+        "selectielijstregel": "Bezwaar en beroep — vernietigen na onherroepelijk worden",
+        "regelCode": "BZ1",
+        "waardering": "V",
+        "bewaartermijnJaren": 7,
+        "overbrengingstermijnJaren": null,
+        "termijntrigger": "Onherroepelijk worden van de beslissing op bezwaar/beroep",
+        "dossierafsluitdatum": "2024-04-15",
+        "termijnstartdatum": "2024-04-15",
+        "onzeker": false,
+        "type": "vernietiging",
+        "vernietigingsdatum": "2031-04-15",
+        "termijnstart": "2024-04-15",
+        "uitzondering": false,
+        "hotspots": []
+      },
+      "verwacht": {
+        "dossierId": "DOS-0003",
+        "procestypeCode": "BEZWAAR",
+        "resultaatCode": "AFGEROND",
+        "waardering": "V"
+      }
+    },
+    {
+      "dossierId": "DOS-0004",
+      "dossierNaam": "Facturen leverancier Kantoor BV",
+      "status": "OK",
+      "engine": "mock",
+      "procestypeCode": "FINANCIEEL",
+      "resultaatCode": "FACTUUR",
+      "confidence": 0.9,
+      "evidence": [
+        "factuur",
+        "facturen",
+        "boekjaar",
+        "betaald"
+      ],
+      "chain": {
+        "status": "OK",
+        "selectielijstversie": "demo-2025.01",
+        "procestype": "Financiële administratie",
+        "resultaat": "Betaalde factuur",
+        "procestypeCode": "FINANCIEEL",
+        "resultaatCode": "FACTUUR",
+        "selectielijstregel": "Facturen — vernietigen na afloop boekjaar",
+        "regelCode": "F1",
+        "waardering": "V",
+        "bewaartermijnJaren": 7,
+        "overbrengingstermijnJaren": null,
+        "termijntrigger": "Afloop van het boekjaar waarin de factuur is voldaan",
+        "dossierafsluitdatum": "2023-12-31",
+        "termijnstartdatum": "2024-01-01",
+        "onzeker": false,
+        "type": "vernietiging",
+        "vernietigingsdatum": "2031-01-01",
+        "termijnstart": "2024-01-01",
+        "uitzondering": false,
+        "hotspots": []
+      },
+      "verwacht": {
+        "dossierId": "DOS-0004",
+        "procestypeCode": "FINANCIEEL",
+        "resultaatCode": "FACTUUR",
+        "waardering": "V"
+      }
+    },
+    {
+      "dossierId": "DOS-0005",
+      "dossierNaam": "Aanvraag standplaatsvergunning (geweigerd)",
+      "status": "OK",
+      "engine": "mock",
+      "procestypeCode": "VERGUNNING",
+      "resultaatCode": "GEWEIGERD",
+      "confidence": 0.77,
+      "evidence": [
+        "vergunning",
+        "standplaats",
+        "geweigerd",
+        "afgewezen"
+      ],
+      "chain": {
+        "status": "OK",
+        "selectielijstversie": "demo-2025.01",
+        "procestype": "Vergunningverlening",
+        "resultaat": "Vergunning geweigerd",
+        "procestypeCode": "VERGUNNING",
+        "resultaatCode": "GEWEIGERD",
+        "selectielijstregel": "Vergunning geweigerd — vernietigen na onherroepelijk worden",
+        "regelCode": "V2",
+        "waardering": "V",
+        "bewaartermijnJaren": 5,
+        "overbrengingstermijnJaren": null,
+        "termijntrigger": "Onherroepelijk worden van de afwijzing",
+        "dossierafsluitdatum": "2023-10-01",
+        "termijnstartdatum": "2023-10-01",
+        "onzeker": false,
+        "type": "vernietiging",
+        "vernietigingsdatum": "2028-10-01",
+        "termijnstart": "2023-10-01",
+        "uitzondering": false,
+        "hotspots": []
+      },
+      "verwacht": {
+        "dossierId": "DOS-0005",
+        "procestypeCode": "VERGUNNING",
+        "resultaatCode": "GEWEIGERD",
+        "waardering": "V"
+      }
+    },
+    {
+      "dossierId": "DOS-0006",
+      "dossierNaam": "Ongestructureerde aantekeningen",
+      "status": "NIET_CLASSIFICEERBAAR",
+      "engine": "mock",
+      "procestypeCode": null,
+      "resultaatCode": null,
+      "confidence": 0,
+      "evidence": [],
+      "chain": null,
+      "verwacht": null
+    }
+  ],
+  "twijfel": [
+    "DOS-0006"
+  ],
+  "summary": {
+    "totaal": 6,
+    "beoordeeld": 5,
+    "correctPt": 5,
+    "correctR": 5,
+    "correctBV": 5
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "versie": "demo-2025.01",
+  "naam": "Voorbeeld gemeentelijke selectielijst (DEMO — niet de officiële lijst)",
+  "beschrijving": "Vereenvoudigde, fictieve selectielijst om de keten en de deterministische rules engine te demonstreren. Alle codes, termijnen en triggers zijn illustratief.",
+  "overbrengingstermijnJaren": 20,
+  "hotspotcriteria": [
+    { "code": "MILIEU", "naam": "Milieuverontreiniging / bodemsanering" },
+    { "code": "MONUMENT", "naam": "Archeologie / monumenten" },
+    { "code": "INTEGRITEIT", "naam": "Ondermijning / integriteitskwesties" }
+  ],
+  "procestypen": [
+    {
+      "code": "VERGUNNING",
+      "naam": "Vergunningverlening",
+      "sleutelwoorden": ["vergunning", "horeca", "exploitatie", "standplaats", "terras"],
+      "resultaten": [
+        {
+          "code": "VERLEEND",
+          "naam": "Vergunning verleend",
+          "type": "specifiek",
+          "regel": "V1",
+          "selectielijstregel": "Vergunning verleend — vernietigen na einde geldigheid",
+          "waardering": "V",
+          "bewaartermijnJaren": 10,
+          "termijntrigger": "Einde geldigheid van de vergunning (of intrekking)",
+          "signaalwoorden": ["verleend", "verlenen", "verleent", "toegekend"]
+        },
+        {
+          "code": "GEWEIGERD",
+          "naam": "Vergunning geweigerd",
+          "type": "specifiek",
+          "regel": "V2",
+          "selectielijstregel": "Vergunning geweigerd — vernietigen na onherroepelijk worden",
+          "waardering": "V",
+          "bewaartermijnJaren": 5,
+          "termijntrigger": "Onherroepelijk worden van de afwijzing",
+          "signaalwoorden": ["geweigerd", "weigeren", "afwijzen", "afgewezen"]
+        }
+      ]
+    },
+    {
+      "code": "BOUW",
+      "naam": "Omgevingsvergunning bouwen / bouwdossier",
+      "sleutelwoorden": ["bouw", "omgevingsvergunning", "bouwwerk", "aanbouw", "dakkapel", "sloop", "verbouw"],
+      "resultaten": [
+        {
+          "code": "VERGUND",
+          "naam": "Vergund bouwwerk",
+          "type": "specifiek",
+          "regel": "B1",
+          "selectielijstregel": "Bouwdossier van vergund bouwwerk — blijvend bewaren",
+          "waardering": "B",
+          "termijntrigger": "Gereedmelding / oplevering van het bouwwerk",
+          "signaalwoorden": ["vergund", "verleend", "gereedmelding", "oplevering"]
+        },
+        {
+          "code": "GEWEIGERD",
+          "naam": "Bouwaanvraag geweigerd",
+          "type": "specifiek",
+          "regel": "B2",
+          "selectielijstregel": "Geweigerde bouwaanvraag — vernietigen",
+          "waardering": "V",
+          "bewaartermijnJaren": 10,
+          "termijntrigger": "Onherroepelijk worden van de afwijzing",
+          "signaalwoorden": ["geweigerd", "afgewezen", "afwijzen"]
+        }
+      ]
+    },
+    {
+      "code": "BEZWAAR",
+      "naam": "Bezwaar en beroep",
+      "sleutelwoorden": ["bezwaar", "beroep", "beslissing op bezwaar", "hoorzitting"],
+      "resultaten": [
+        {
+          "code": "AFGEROND",
+          "naam": "Bezwaar-/beroepsprocedure afgerond",
+          "type": "generiek",
+          "regel": "BZ1",
+          "selectielijstregel": "Bezwaar en beroep — vernietigen na onherroepelijk worden",
+          "waardering": "V",
+          "bewaartermijnJaren": 7,
+          "termijntrigger": "Onherroepelijk worden van de beslissing op bezwaar/beroep"
+        }
+      ]
+    },
+    {
+      "code": "FINANCIEEL",
+      "naam": "Financiële administratie",
+      "sleutelwoorden": ["factuur", "facturen", "boekjaar", "betaling", "betaald", "debiteur"],
+      "resultaten": [
+        {
+          "code": "FACTUUR",
+          "naam": "Betaalde factuur",
+          "type": "generiek",
+          "regel": "F1",
+          "selectielijstregel": "Facturen — vernietigen na afloop boekjaar",
+          "waardering": "V",
+          "bewaartermijnJaren": 7,
+          "termijntrigger": "Afloop van het boekjaar waarin de factuur is voldaan"
+        }
+      ]
+    },
+    {
+      "code": "PERSONEEL",
+      "naam": "Personeelsdossier",
+      "sleutelwoorden": ["personeel", "arbeidsovereenkomst", "medewerker", "uitdienst", "salaris", "contract"],
+      "resultaten": [
+        {
+          "code": "UITDIENST",
+          "naam": "Personeelsdossier na uitdiensttreding",
+          "type": "specifiek",
+          "regel": "P1",
+          "selectielijstregel": "Personeelsdossier — vernietigen na uitdiensttreding",
+          "waardering": "V",
+          "bewaartermijnJaren": 10,
+          "termijntrigger": "Uitdiensttreding van de medewerker"
+        }
+      ]
+    },
+    {
+      "code": "SUBSIDIE",
+      "naam": "Subsidieverstrekking",
+      "sleutelwoorden": ["subsidie", "subsidievaststelling", "verleningsbeschikking", "vaststelling"],
+      "resultaten": [
+        {
+          "code": "VASTGESTELD",
+          "naam": "Subsidie vastgesteld",
+          "type": "specifiek",
+          "regel": "S1",
+          "selectielijstregel": "Subsidiedossier — vernietigen na vaststelling",
+          "waardering": "V",
+          "bewaartermijnJaren": 10,
+          "termijntrigger": "Vaststelling van de subsidie"
+        }
+      ]
+    }
+  ]
+}

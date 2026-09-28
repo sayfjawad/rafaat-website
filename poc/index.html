@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#002f55">
+<title>POC — DMS-classificatie | Ralebate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand: #002f55;
+    --accent: #0984d8;
+    --bg: #f4f6f8;
+    --border: #dfe5ea;
+    --muted: #6b7a88;
+  }
+  * { box-sizing: border-box; }
+  html, body { min-height: 100%; margin: 0; }
+  body {
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #1c2b3a;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .site-nav { background: var(--brand); color: #fff; position: sticky; top: 0; z-index: 10; box-shadow: 0 1px 4px rgba(0,0,0,.18); }
+  .nav-inner { max-width: 1170px; margin: 0 auto; padding: 0 15px; display: flex; align-items: stretch; gap: 10px; }
+  .nav-links { display: flex; align-items: center; gap: 2px; flex: 1; }
+  .nav-links.right { justify-content: flex-end; }
+  .nav-links a { color: #fff; text-decoration: none; font-size: .95rem; font-weight: 600; padding: 22px 12px; white-space: nowrap; }
+  .nav-links a:hover { background: rgba(255,255,255,.12); }
+  .brand { align-self: center; background: #fff; border-radius: 0 0 14px 14px; padding: 8px 14px 12px; margin-top: -6px; box-shadow: 0 2px 6px rgba(0,0,0,.18); display: inline-flex; }
+  .brand img { height: 30px; width: auto; display: block; }
+  @media (max-width: 640px) { .nav-links a.hide-sm { display: none; } .brand img { height: 24px; } }
+
+  main { flex: 1; width: 100%; max-width: 1100px; margin: 0 auto; padding: 24px 16px 40px; }
+  h1 { color: var(--brand); font-size: 1.5rem; margin: 0 0 4px; }
+  .lead { color: var(--muted); margin: 0 0 20px; max-width: 800px; }
+
+  .toolbar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+  button { background: var(--brand); color: #fff; border: none; border-radius: 8px; padding: 11px 18px; font: inherit; font-weight: 700; cursor: pointer; }
+  button:hover { background: #0a4a80; }
+  button.secondary { background: #fff; color: var(--brand); border: 1px solid var(--brand); }
+  button.secondary:hover { background: #eef4fa; }
+  button:disabled { opacity: .55; cursor: not-allowed; }
+  #status { color: var(--muted); font-size: .9rem; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+  .card .num { font-size: 1.7rem; font-weight: 700; color: var(--brand); }
+  .card .lbl { font-size: .8rem; color: var(--muted); }
+
+  .panel { background: #fff; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+  .panel h2 { font-size: 1rem; margin: 0; padding: 12px 16px; background: #f0f4f8; color: var(--brand); }
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  th, td { text-align: left; padding: 10px 12px; border-top: 1px solid var(--border); vertical-align: top; }
+  thead th { background: #fff; font-size: .78rem; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+  td small { color: var(--muted); display: block; }
+
+  .badge { display: inline-block; padding: 2px 9px; border-radius: 200px; font-size: .78rem; font-weight: 700; }
+  .badge.B { background: #e3f2fd; color: #0b63a8; }
+  .badge.V { background: #fff3e6; color: #c25e00; }
+  .badge.OK { background: #e7f6ec; color: #1c7c3c; }
+  .badge.WARN { background: #fff7e0; color: #9a6a00; }
+  .badge.ERR { background: #fdeaea; color: #b03a3a; }
+
+  .twijfel { margin-top: 16px; padding: 12px 16px; background: #fff7e0; border: 1px solid #f0d48a; border-radius: 10px; font-size: .9rem; }
+  .twijfel b { color: #9a6a00; }
+  .empty { padding: 24px; color: var(--muted); text-align: center; }
+
+  footer.colophon { background: var(--brand); color: rgba(255,255,255,.85); padding: 20px 16px; text-align: center; font-size: .88rem; }
+  footer.colophon a { color: #fff; }
+</style>
+</head>
+<body>
+<nav class="site-nav">
+    <div class="nav-inner">
+      <div class="nav-links left">
+        <a href="../">Home</a>
+        <a href="../chat.html" class="hide-sm">Chat</a>
+      </div>
+      <a class="brand" href="../" title="Ralebate">
+        <img src="../wp-content/themes/marvin/assets/img/logo.svg" alt="Ralebate">
+      </a>
+      <div class="nav-links right">
+        <a href="../over-ons/" class="hide-sm">Over ons</a>
+        <a href="../contact/" class="hide-sm">Contact</a>
+        <a href="../">Terug naar site</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <h1>POC — DMS-classificatie</h1>
+    <p class="lead">
+      Demonstratie van de keten
+      <strong>Document → Dossier → Procestype → Resultaat → Selectielijstregel → B/V → Termijn → Vernietigings-/overbrengingsmoment</strong>.
+      Het LLM classificeert binnen voorgeschreven categorieën; de rules engine bepaalt de formele waardering.
+    </p>
+
+    <div class="toolbar">
+      <button id="run">▶ Draai de keten (mock)</button>
+      <button id="run-llm" class="secondary">▶ Draai met private LLM (traag)</button>
+      <span id="status"></span>
+    </div>
+
+    <div class="cards" id="cards" hidden>
+      <div class="card"><div class="num" id="s-totaal">–</div><div class="lbl">Dossiers</div></div>
+      <div class="card"><div class="num" id="s-procestype">–</div><div class="lbl">Procestype correct</div></div>
+      <div class="card"><div class="num" id="s-resultaat">–</div><div class="lbl">Resultaat correct</div></div>
+      <div class="card"><div class="num" id="s-bv">–</div><div class="lbl">B/V correct</div></div>
+    </div>
+
+    <div class="panel">
+      <h2>Resultaten</h2>
+      <div id="empty" class="empty">Druk op “Draai de keten” om het resultaat te zien.</div>
+      <table id="tabel" hidden>
+        <thead>
+          <tr>
+            <th>Dossier</th>
+            <th>Procestype / resultaat</th>
+            <th>B/V</th>
+            <th>Termijn</th>
+            <th>Moment</th>
+            <th>Conf.</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+
+    <div class="twijfel" id="twijfel" hidden></div>
+  </main>
+
+  <footer class="colophon">
+    <div class="container">Ralebate — POC classificatie · selectielijst <span id="versie">–</span></div>
+  </footer>
+
+<script>
+  const runBtn = document.getElementById("run");
+  const runLlmBtn = document.getElementById("run-llm");
+  const statusEl = document.getElementById("status");
+  const cardsEl = document.getElementById("cards");
+  const tabelEl = document.getElementById("tabel");
+  const rowsEl = document.getElementById("rows");
+  const emptyEl = document.getElementById("empty");
+  const twijfelEl = document.getElementById("twijfel");
+  const versieEl = document.getElementById("versie");
+
+  function badge(text, cls) {
+    const s = document.createElement("span");
+    s.className = "badge " + cls;
+    s.textContent = text;
+    return s;
+  }
+
+  function statusBadge(status) {
+    if (status === "OK") return badge(status, "OK");
+    if (status === "ONZEKER") return badge(status, "WARN");
+    return badge(status, "ERR");
+  }
+
+  function run(engine) {
+    runBtn.disabled = true;
+    runLlmBtn.disabled = true;
+    statusEl.textContent = engine === "llm" ? "Bezig met de private LLM… dit kan lang duren." : "Bezig…";
+    fetch("../api/poc/run" + (engine === "llm" ? "?engine=llm" : ""))
+      .then((res) => res.json().catch(() => ({})))
+      .then((data) => {
+        if (data.error) throw new Error(data.error);
+        render(data);
+        statusEl.textContent = "Klaar (selectielijst " + data.selectielijstversie + ").";
+      })
+      .catch((e) => {
+        statusEl.textContent = "⚠ " + e.message;
+      })
+      .finally(() => {
+        runBtn.disabled = false;
+        runLlmBtn.disabled = false;
+      });
+  }
+
+  function render(data) {
+    const s = data.summary;
+    document.getElementById("s-totaal").textContent = s.totaal;
+    document.getElementById("s-procestype").textContent = s.beoordeeld ? s.correctPt + "/" + s.beoordeeld : "n.v.t.";
+    document.getElementById("s-resultaat").textContent = s.beoordeeld ? s.correctR + "/" + s.beoordeeld : "n.v.t.";
+    document.getElementById("s-bv").textContent = s.beoordeeld ? s.correctBV + "/" + s.beoordeeld : "n.v.t.";
+    versieEl.textContent = data.selectielijstversie;
+
+    cardsEl.hidden = false;
+    emptyEl.hidden = true;
+    tabelEl.hidden = false;
+    rowsEl.innerHTML = "";
+
+    for (const x of data.resultaten) {
+      const tr = document.createElement("tr");
+
+      const tdDossier = document.createElement("td");
+      tdDossier.textContent = x.dossierId;
+      const small = document.createElement("small");
+      small.textContent = x.dossierNaam;
+      tdDossier.appendChild(small);
+
+      const tdKlass = document.createElement("td");
+      tdKlass.textContent = (x.procestypeCode || "-") + " / " + (x.resultaatCode || "-");
+
+      const bv = x.chain ? x.chain.waardering : "—";
+      const tdBV = document.createElement("td");
+      tdBV.appendChild(badge(bv, bv === "B" ? "B" : bv === "V" ? "V" : "WARN"));
+
+      const tdTermijn = document.createElement("td");
+      tdTermijn.textContent = x.chain
+        ? (x.chain.waardering === "B" ? "blijvend" : x.chain.bewaartermijnJaren + " jr")
+        : "—";
+
+      const tdMoment = document.createElement("td");
+      tdMoment.textContent = x.chain
+        ? (x.chain.vernietigingsdatum
+            ? "Vernietigen " + x.chain.vernietigingsdatum
+            : x.chain.overbrengingsdatum
+              ? "Overbrengen " + x.chain.overbrengingsdatum
+              : "—")
+        : "—";
+
+      const tdConf = document.createElement("td");
+      tdConf.textContent = x.confidence;
+
+      const tdStatus = document.createElement("td");
+      tdStatus.appendChild(statusBadge(x.status));
+
+      tr.append(tdDossier, tdKlass, tdBV, tdTermijn, tdMoment, tdConf, tdStatus);
+      rowsEl.appendChild(tr);
+    }
+
+    if (data.twijfel && data.twijfel.length) {
+      twijfelEl.hidden = false;
+      twijfelEl.innerHTML = "";
+      const b = document.createElement("b");
+      b.textContent = "⚠ Twijfelgevallen voor menselijke beoordeling: ";
+      twijfelEl.appendChild(b);
+      twijfelEl.appendChild(document.createTextNode(data.twijfel.join(", ")));
+    } else {
+      twijfelEl.hidden = true;
+    }
+  }
+
+  runBtn.addEventListener("click", () => run("mock"));
+  runLlmBtn.addEventListener("click", () => run("llm"));
+</script>
+</body>
+</html>

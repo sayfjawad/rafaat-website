@@ -1,0 +1,78 @@
+{
+  "beschrijving": "Kleine fictieve proefdataset voor de POC. Alle namen, adressen en teksten zijn verzonnen.",
+  "dossiers": [
+    {
+      "id": "DOS-0001",
+      "naam": "Horecavergunning Café de Zon",
+      "onderwerp": "Exploitatievergunning horeca",
+      "dossierafsluitdatum": "2023-12-31",
+      "termijnstartdatum": "2024-01-01",
+      "hotspotCodes": [],
+      "documenten": [
+        { "id": "DOC-0001-1", "naam": "aanvraag-vergunning.pdf", "datum": "2023-05-12", "onderwerp": "Aanvraag exploitatievergunning", "tekst": "Aanvraag voor een exploitatievergunning voor een horecagelegenheid." },
+        { "id": "DOC-0001-2", "naam": "besluit-verleend.pdf", "datum": "2023-08-01", "onderwerp": "Besluit vergunning", "tekst": "De vergunning wordt verleend voor de exploitatie van de horecagelegenheid." },
+        { "id": "DOC-0001-3", "naam": "brief-start-geldigheid.pdf", "datum": "2024-01-01", "onderwerp": "Start geldigheid vergunning", "tekst": "De vergunning is geldig vanaf 1 januari 2024." }
+      ]
+    },
+    {
+      "id": "DOS-0002",
+      "naam": "Bouwdossier aanbouw woning Dorpsstraat 5",
+      "onderwerp": "Omgevingsvergunning bouwen (aanbouw)",
+      "dossierafsluitdatum": "2025-06-30",
+      "termijnstartdatum": "2025-06-30",
+      "hotspotCodes": ["MONUMENT"],
+      "documenten": [
+        { "id": "DOC-0002-1", "naam": "bouwtekening.pdf", "datum": "2024-11-01", "onderwerp": "Bouwtekening aanbouw", "tekst": "Bouwaanvraag en bouwtekening voor een aanbouw aan een monumentaal pand." },
+        { "id": "DOC-0002-2", "naam": "omgevingsvergunning.pdf", "datum": "2025-02-15", "onderwerp": "Omgevingsvergunning bouwen", "tekst": "De omgevingsvergunning voor het bouwwerk is vergund." },
+        { "id": "DOC-0002-3", "naam": "gereedmelding.pdf", "datum": "2025-06-30", "onderwerp": "Gereedmelding", "tekst": "Het bouwwerk is opgeleverd en gereedgemeld." }
+      ]
+    },
+    {
+      "id": "DOS-0003",
+      "naam": "Bezwaar tegen horecavergunning",
+      "onderwerp": "Bezwaarprocedure",
+      "dossierafsluitdatum": "2024-04-15",
+      "termijnstartdatum": "2024-04-15",
+      "hotspotCodes": [],
+      "documenten": [
+        { "id": "DOC-0003-1", "naam": "bezwaarschrift.pdf", "datum": "2023-09-01", "onderwerp": "Bezwaarschrift", "tekst": "Bewoner dient een bezwaar in tegen de verleende vergunning." },
+        { "id": "DOC-0003-2", "naam": "beslissing-op-bezwaar.pdf", "datum": "2024-04-15", "onderwerp": "Beslissing op bezwaar", "tekst": "De beslissing op bezwaar verklaart het bezwaar ongegrond; de procedure is onherroepelijk." }
+      ]
+    },
+    {
+      "id": "DOS-0004",
+      "naam": "Facturen leverancier Kantoor BV",
+      "onderwerp": "Financiële administratie",
+      "dossierafsluitdatum": "2023-12-31",
+      "termijnstartdatum": "2024-01-01",
+      "hotspotCodes": [],
+      "documenten": [
+        { "id": "DOC-0004-1", "naam": "factuur-2023-01.pdf", "datum": "2023-03-10", "onderwerp": "Factuur", "tekst": "Factuur voor geleverde diensten; betaald op 2023-04-01." },
+        { "id": "DOC-0004-2", "naam": "factuur-2023-02.pdf", "datum": "2023-09-22", "onderwerp": "Factuur", "tekst": "Factuur voor onderhoud; betaald binnen het boekjaar." }
+      ]
+    },
+    {
+      "id": "DOS-0005",
+      "naam": "Aanvraag standplaatsvergunning (geweigerd)",
+      "onderwerp": "Vergunning geweigerd",
+      "dossierafsluitdatum": "2023-10-01",
+      "termijnstartdatum": "2023-10-01",
+      "hotspotCodes": [],
+      "documenten": [
+        { "id": "DOC-0005-1", "naam": "aanvraag.pdf", "datum": "2023-06-01", "onderwerp": "Aanvraag standplaatsvergunning", "tekst": "Aanvraag voor een standplaatsvergunning voor een marktkraam." },
+        { "id": "DOC-0005-2", "naam": "afwijzing.pdf", "datum": "2023-10-01", "onderwerp": "Afwijzing vergunning", "tekst": "De aanvraag wordt afgewezen; de vergunning wordt geweigerd." }
+      ]
+    },
+    {
+      "id": "DOS-0006",
+      "naam": "Ongestructureerde aantekeningen",
+      "onderwerp": "Diverse notities zonder duidelijk proceskenmerk",
+      "dossierafsluitdatum": "2022-03-01",
+      "termijnstartdatum": "2022-03-01",
+      "hotspotCodes": [],
+      "documenten": [
+        { "id": "DOC-0006-1", "naam": "notities.pdf", "datum": "2022-03-01", "onderwerp": "Aantekeningen", "tekst": "Losse notities en kladwerk zonder duidelijk onderwerp of proceskenmerk." }
+      ]
+    }
+  ]
+}

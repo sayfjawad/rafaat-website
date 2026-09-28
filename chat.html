@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#002f55">
+<title>Chat — Ralebate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand: #002f55;
+    --brand-2: #0a4a80;
+    --accent: #0984d8;
+    --bg: #f4f6f8;
+    --user: #002f55;
+    --user-text: #ffffff;
+    --bot: #ffffff;
+    --bot-text: #1c2b3a;
+    --border: #dfe5ea;
+    --muted: #6b7a88;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--bot-text);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ---------- Site-navigatie (zelfde stijl als index.html) ---------- */
+  .site-nav {
+    background: var(--brand);
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 1px 4px rgba(0,0,0,.18);
+  }
+  .nav-inner {
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+  }
+  .nav-links.right { justify-content: flex-end; }
+  .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: .95rem;
+    font-weight: 600;
+    padding: 22px 12px;
+    white-space: nowrap;
+  }
+  .nav-links a:hover { background: rgba(255,255,255,.12); }
+  .nav-links a.highlight {
+    background: var(--accent);
+    border-radius: 200px;
+    padding: 10px 20px;
+    margin-left: 6px;
+    font-weight: 700;
+  }
+  .nav-links a.highlight:hover { background: #0766a7; }
+  .brand {
+    align-self: center;
+    background: #fff;
+    border-radius: 0 0 14px 14px;
+    padding: 8px 14px 12px;
+    margin-top: -6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.18);
+    display: inline-flex;
+  }
+  .brand img { height: 34px; width: auto; display: block; }
+  @media (max-width: 860px) {
+    .nav-links a { padding: 16px 8px; font-size: .85rem; }
+    .nav-links a.highlight { padding: 8px 14px; }
+    .brand img { height: 26px; }
+  }
+  @media (max-width: 640px) {
+    .nav-links a.hide-sm { display: none; }
+    .brand { padding: 6px 10px 10px; }
+  }
+
+  /* ---------- Chatgebied ---------- */
+  .chat-wrap {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 16px;
+    display: flex;
+  }
+  .chat-card {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.06);
+    overflow: hidden;
+  }
+  .chat-header {
+    background: var(--brand);
+    color: #fff;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .chat-header .dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #43d17a; box-shadow: 0 0 0 4px rgba(67,209,122,.25);
+  }
+  .chat-header h1 { font-size: 1.05rem; margin: 0; font-weight: 700; }
+  .chat-header .sub { font-size: .78rem; opacity: .8; }
+  .chat-header .spacer { flex: 1; }
+  #reset {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.4);
+    border-radius: 6px;
+    padding: 7px 12px;
+    font-size: .85rem;
+    cursor: pointer;
+  }
+  #reset:hover { background: rgba(255,255,255,.12); }
+
+  #messages {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--bg);
+  }
+  .msg { display: flex; }
+  .msg.user { justify-content: flex-end; }
+  .msg.bot { justify-content: flex-start; }
+  .bubble {
+    max-width: 78%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    line-height: 1.45;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+  }
+  .msg.user .bubble {
+    background: var(--user);
+    color: var(--user-text);
+    border-bottom-right-radius: 4px;
+  }
+  .msg.bot .bubble {
+    background: var(--bot);
+    color: var(--bot-text);
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  }
+  .bubble .who {
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    opacity: .65;
+    margin-bottom: 3px;
+  }
+  .bubble .body { white-space: pre-wrap; }
+  .bubble .body:empty::after { content: "…"; }
+  .typing .bubble { color: var(--muted); font-style: italic; }
+
+  details.reasoning {
+    margin-top: 8px;
+    border-top: 1px solid var(--border);
+    padding-top: 6px;
+    font-size: .82rem;
+  }
+  .msg.user details.reasoning { border-color: rgba(255,255,255,.3); }
+  details.reasoning summary { cursor: pointer; opacity: .7; user-select: none; }
+  .reasoning-body { white-space: pre-wrap; opacity: .8; margin-top: 4px; font-size: .8rem; }
+
+  #composer {
+    display: flex;
+    gap: 10px;
+    padding: 12px 16px;
+    background: #fff;
+    border-top: 1px solid var(--border);
+  }
+  #input {
+    flex: 1;
+    resize: none;
+    min-height: 44px;
+    max-height: 140px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 11px 14px;
+    font: inherit;
+    font-size: .95rem;
+  }
+  #input:focus { outline: none; border-color: var(--brand-2); }
+  #send {
+    background: var(--brand);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0 20px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  #send:hover { background: var(--brand-2); }
+  #send:disabled { opacity: .55; cursor: not-allowed; }
+  @media (max-width: 480px) {
+    .bubble { max-width: 92%; }
+    .chat-wrap { padding: 8px; }
+  }
+
+  /* ---------- Footer (zelfde stijl als index.html) ---------- */
+  .colophon {
+    background: var(--brand);
+    color: rgba(255,255,255,.85);
+    padding: 20px 16px;
+    text-align: center;
+    font-size: .88rem;
+  }
+  .colophon .container { max-width: 1170px; margin: 0 auto; }
+  .colophon a { color: #fff; }
+  .colophon a:hover { color: #9fd4ff; }
+  .colophon .contact-line { margin-bottom: 8px; }
+</style>
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <div class="nav-links left">
+        <a href="./">Home</a>
+        <a href="diensten/" class="hide-sm">Diensten</a>
+        <a href="nieuws/" class="hide-sm">Nieuws</a>
+      </div>
+      <a class="brand" href="./" title="Ralebate">
+        <img src="wp-content/themes/marvin/assets/img/logo.svg" alt="Ralebate">
+      </a>
+      <div class="nav-links right">
+        <a href="over-ons/" class="hide-sm">Over ons</a>
+        <a href="contact/" class="hide-sm">Contact</a>
+        <a class="highlight" href="tel:+31612640007">BEL ONS NU</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="chat-wrap">
+    <section class="chat-card">
+      <header class="chat-header">
+        <span class="dot"></span>
+        <div>
+          <h1>Ralebate Chat</h1>
+          <div class="sub">Online — stel gerust je vraag</div>
+        </div>
+        <span class="spacer"></span>
+        <button id="reset" type="button">Nieuw gesprek</button>
+      </header>
+
+      <div id="messages" aria-live="polite"></div>
+
+      <form id="composer">
+        <textarea id="input" rows="1" placeholder="Stel hier je vraag…" aria-label="Je bericht"></textarea>
+        <button id="send" type="submit">Verstuur</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="colophon">
+    <div class="container">
+      <div class="contact-line">
+        <a href="mailto:info@ralebate.nl">info@ralebate.nl</a>
+        &nbsp;·&nbsp; <a href="tel:+31612640007">(+31) 6 12 64 00 07</a>
+        &nbsp;·&nbsp; Looweg 45C, Bathmen
+      </div>
+      <div>Copyright &copy; 2026 - Ralebate //
+        <a href="privacybeleid/">Privacybeleid</a> //
+        <a href="algemene-voorwaarden/">Algemene voorwaarden</a>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  const list = document.getElementById("messages");
+  const form = document.getElementById("composer");
+  const input = document.getElementById("input");
+  const sendBtn = document.getElementById("send");
+  const resetBtn = document.getElementById("reset");
+
+  // Gespreksgeschiedenis die we naar de backend meesturen.
+  const messages = [];
+
+  function addBubble(role, text, reasoning) {
+    const row = document.createElement("div");
+    row.className = "msg " + (role === "user" ? "user" : "bot");
+
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+
+    const who = document.createElement("div");
+    who.className = "who";
+    who.textContent = role === "user" ? "Jij" : "Ralebate";
+
+    const body = document.createElement("div");
+    body.className = "body";
+    body.textContent = text;
+
+    bubble.appendChild(who);
+    bubble.appendChild(body);
+
+    if (reasoning) {
+      const det = document.createElement("details");
+      det.className = "reasoning";
+      const sum = document.createElement("summary");
+      sum.textContent = "🧠 Denkproces";
+      const pre = document.createElement("div");
+      pre.className = "reasoning-body";
+      pre.textContent = reasoning;
+      det.appendChild(sum);
+      det.appendChild(pre);
+      bubble.appendChild(det);
+    }
+
+    row.appendChild(bubble);
+    list.appendChild(row);
+    list.scrollTop = list.scrollHeight;
+  }
+
+  function addTyping() {
+    removeTyping();
+    const row = document.createElement("div");
+    row.className = "msg bot typing";
+    row.id = "typing";
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+    bubble.textContent = "Aan het typen…";
+    row.appendChild(bubble);
+    list.appendChild(row);
+    list.scrollTop = list.scrollHeight;
+  }
+
+  function removeTyping() {
+    const t = document.getElementById("typing");
+    if (t) t.remove();
+  }
+
+  async function send() {
+    const text = input.value.trim();
+    if (!text) return;
+
+    input.value = "";
+    input.disabled = true;
+    sendBtn.disabled = true;
+
+    messages.push({ role: "user", content: text });
+    addBubble("user", text);
+    addTyping();
+
+    try {
+      const res = await fetch("api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(data.error || ("Fout " + res.status));
+      }
+      const reply = data.reply || "(geen antwoord)";
+      messages.push({ role: "assistant", content: reply });
+      removeTyping();
+      addBubble("bot", reply, data.reasoning || "");
+    } catch (err) {
+      removeTyping();
+      addBubble("bot", "⚠️ " + err.message);
+    } finally {
+      input.disabled = false;
+      sendBtn.disabled = false;
+      input.focus();
+    }
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    send();
+  });
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      send();
+    }
+  });
+
+  resetBtn.addEventListener("click", () => {
+    messages.length = 0;
+    list.innerHTML = "";
+    addBubble("bot", "Hallo! Waarmee kan ik je helpen?");
+    input.focus();
+  });
+
+  // Startbericht
+  addBubble("bot", "Hallo! Waarmee kan ik je helpen?");
+</script>
+</body>
+</html>
